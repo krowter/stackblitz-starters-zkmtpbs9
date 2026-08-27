@@ -4,9 +4,9 @@ const TYPE = {
 };
 
 const ITEMS_ORIGINAL = [
-  { type: TYPE.MEAL, text: 'breakfast' },
-  { type: TYPE.MEAL, text: 'lunch' },
-  { type: TYPE.MEAL, text: 'dinner' }
+  { type: TYPE.MEAL, text: 'breakfast', done: false },
+  { type: TYPE.MEAL, text: 'lunch', done: false },
+  { type: TYPE.MEAL, text: 'dinner', done: false },
 ];
 
 const itemsLocalstorageKey = 'med_tracker_items';
@@ -71,6 +71,10 @@ function render() {
       itemEl.classList.toggle('done');
     };
 
+    if (item.done) {
+      itemEl.classList.add('done');
+    }
+
     const btnGroupEl = document.createElement('div');
     btnGroupEl.classList.add('btn-group');
 
@@ -110,9 +114,12 @@ formEl.onsubmit = (e) => {
 
 const lastUpdatedDate = localStorage.getItem(timestampLocalstorageKey);
 
-if (new Date(lastUpdatedDate).getDate() !== new Date().getDate()) {
-  const storedItems = localStorage.getItem(itemsLocalstorageKey);
-  itemsToRender = JSON.parse(storedItems);
+const storedItems = localStorage.getItem(itemsLocalstorageKey);
 
-  render();
+if (new Date(lastUpdatedDate).getDate() !== new Date().getDate()) {
+  itemsToRender = JSON.parse(storedItems).map(a => ({ ...a, done: false }))
+} else {
+  itemsToRender = JSON.parse(storedItems);
 }
+
+render();
