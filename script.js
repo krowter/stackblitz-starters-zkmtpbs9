@@ -69,6 +69,7 @@ function render() {
     doneButtonEl.onclick = () => {
       markTimestamp();
       itemEl.classList.toggle('done');
+      itemsToRender[i].done = true
     };
 
     if (item.done) {
@@ -106,7 +107,7 @@ formEl.onsubmit = (e) => {
   itemsToRender = structuredClone(ITEMS_ORIGINAL);
 
   meds.forEach((med) => {
-    itemsToRender.push({ type: TYPE.MED, text: med });
+    itemsToRender.push({ type: TYPE.MED, text: med, done: false });
   });
 
   render();
