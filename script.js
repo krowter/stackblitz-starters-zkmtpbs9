@@ -30,6 +30,9 @@ function render() {
   itemsToRender.forEach((item, i) => {
     const itemEl = document.createElement('li');
     itemEl.classList.add(item.type);
+    if (item.done) {
+      itemEl.classList.add('done');
+    }
     itemEl.textContent = item.text.trim();
 
     const upButtonEl = document.createElement('button');
@@ -69,7 +72,7 @@ function render() {
     doneButtonEl.onclick = () => {
       markTimestamp();
       itemEl.classList.toggle('done');
-      itemsToRender[i].done = true
+      itemsToRender[i].done = itemEl.classList.contains('done')
     };
 
     if (item.done) {
