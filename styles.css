@@ -47,6 +47,10 @@ body {
   transform: rotate(180deg);
 }
 
+#main ol li .btn-group img.delete {
+  background-color: red;
+}
+
 form#input {
   margin-top: 3rem;
 }

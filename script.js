@@ -44,6 +44,11 @@ function render() {
     downButtonIconImg.src = './icon-up.svg';
     downButtonIconImg.classList.add('down');
     downButtonEl.append(downButtonIconImg);
+    const deleteButtonEl = document.createElement('button');
+    const deleteButtonIconImg = document.createElement('img');
+    deleteButtonIconImg.src = './icon-minus.svg';
+    deleteButtonIconImg.classList.add('delete');
+    deleteButtonEl.append(deleteButtonIconImg);
     const doneButtonEl = document.createElement('button');
     const doneButtonIconImg = document.createElement('img');
     doneButtonIconImg.src = './icon-checkmark.svg';
@@ -70,13 +75,22 @@ function render() {
     };
     
     doneButtonEl.onclick = () => {
-      markTimestamp();
-      
       itemEl.classList.toggle('done');
       itemsToRender[i].done = itemEl.classList.contains('done')
       
       storeData();
+      markTimestamp();
     };
+
+    deleteButtonEl.onclick = () => {
+      if (!confirm('Confirm delete?')) return;
+
+      itemsToRender.splice(i, 1)
+    
+      storeData();
+      markTimestamp();
+      render();
+    }
 
     if (item.done) {
       itemEl.classList.add('done');
@@ -91,6 +105,10 @@ function render() {
 
     if (i === 0) {
       upButtonEl.setAttribute('disabled', 'true');
+    }
+    
+    if (item.type === TYPE.MED) {
+      btnGroupEl.append(deleteButtonEl)
     }
 
     btnGroupEl.append(downButtonEl);
