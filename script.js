@@ -137,6 +137,20 @@ formEl.onsubmit = (e) => {
   render();
 };
 
+
+const formSingleEl = document.getElementById('input-single');
+formSingleEl.onsubmit = (e) => {
+  e.preventDefault();
+
+  const inputEl = formSingleEl.querySelector('input');
+
+  const med = inputEl.value;
+
+  itemsToRender.unshift({ type: TYPE.MED, text: med, done: false });
+
+  render();
+}
+
 const lastUpdatedDate = localStorage.getItem(timestampLocalstorageKey);
 
 const storedItems = localStorage.getItem(itemsLocalstorageKey);
