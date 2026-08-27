@@ -51,6 +51,10 @@ form#input {
   margin-top: 3rem;
 }
 
+form#input textarea {
+ height: 4rem;
+}
+
 form#input textarea,
 form#input button {
   width: 100%;
