@@ -68,9 +68,11 @@ function render() {
       markTimestamp();
       render();
     };
-
+    
     doneButtonEl.onclick = () => {
+      storeData();
       markTimestamp();
+      
       itemEl.classList.toggle('done');
       itemsToRender[i].done = itemEl.classList.contains('done')
     };
