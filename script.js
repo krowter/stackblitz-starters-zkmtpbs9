@@ -70,11 +70,12 @@ function render() {
     };
     
     doneButtonEl.onclick = () => {
-      storeData();
       markTimestamp();
       
       itemEl.classList.toggle('done');
       itemsToRender[i].done = itemEl.classList.contains('done')
+      
+      storeData();
     };
 
     if (item.done) {
